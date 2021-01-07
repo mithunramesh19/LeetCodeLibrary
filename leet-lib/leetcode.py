@@ -15,6 +15,10 @@ Input: List[int] arr, int Target, int Time, space Time
 Output: List[int]
 """
 def twoSum(arr, target, time==None, space==None):
+    if arr is None :
+        raise Exception("Array is empty")
+    if target is None:
+        raise Exception("No target selected")
     if time is None and space is None:
         return twoSumN(arr,target)
     elif time is "n2" and space is "1":
@@ -47,7 +51,9 @@ def twoSumN(arr, target):
     """
     The optimized one-pass solution
     We loop through the array once
+    and use a HashMap/Dictionary to store key values of indices
 
+    Enumerate: Stores the index and the value of a given array
     """
     seen = {}
     for i, val in enumerate(arr):
@@ -57,3 +63,33 @@ def twoSumN(arr, target):
         else:
             seen[val] = i
     raise Exception("There is no solution for this arr, target combination")
+
+
+
+"""
+LeetCode Problem 167: Two Sum II [Sorted]
+Input: List[int] arr, int Target
+    arr -> Array input, it is a sorted array
+    Target -> Target Value
+Output: List[int]
+"""
+def twoSumSorted(arr, target):
+    """
+    I only have one time complexity problem for this now
+    NEED TO revisit O(log n)
+    """
+    if(sort(arr) != arr):
+        raise Exception("Array is not sorted")
+    if(target is None):
+        raise Exception("Target is none")
+    left = 0
+    right = len(arr) - 1
+    while(left < right):
+        temp = arr[left] + arr[right]
+        if(temp == target):
+            return [left+1,right+1]
+        elif(temp < target):
+            left += 1
+        elif(temp > target):
+            right -= 1
+    return None 
